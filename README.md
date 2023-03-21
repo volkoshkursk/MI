@@ -1,13 +1,15 @@
 # Description
-NB with custom mutual information calculator for exam.
+C++ library for python with custom mutual information calculations. Originally was part of https://github.com/volkoshkursk/NB.
 
 In this branch will be latest debugged code. 
-In branch `legacy` you can find code in the state it was passed on exam.
 In branch `nouveau` you can find newest version of project.
+# Requirements
+You need have `make` and `python-dev` packages installed.
+
 # Installation
 
 You need create libme.so to run this project. 
-For this purpose you need installed python3-dev on your system. For building library run
+For this purpose you need installed python3-dev on your system. For building on library *nix system run
 
 ```
 make clean && make
