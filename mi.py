@@ -12,7 +12,7 @@ mi_lib = CDLL(libname)
 mi_lib.mi.restype = c_longdouble
 
 
-def mi(txts: Iterable[str], tgts: Iterable[str], word: str, tgt: str, remove_errors: bool=True) -> float:
+def mi(txts: Iterable[str], tgts: Iterable[str], word: str, tgt: str) -> float:
     """ Wrapper for C++ calculation function.
 
     This makes converting variables to C++ types, calling C++ function and returning result.
@@ -29,8 +29,6 @@ def mi(txts: Iterable[str], tgts: Iterable[str], word: str, tgt: str, remove_err
                                 All targets corresponding to one text should be separated by "|".
         @word (str): Word for building Mutual Information for.
         @tgt (str): Target for building mutual information for.
-        @remove_errors (bool, optional): If to change error codes to None. Defaults to True.
-
     
     Result (float): Mutual Information between @word and @tgt.
     """
@@ -42,15 +40,14 @@ def mi(txts: Iterable[str], tgts: Iterable[str], word: str, tgt: str, remove_err
     res = mi_lib.mi(txt_c, len(txts),
                     create_string_buffer(str.encode(tgt)), 
                     tgt_c, create_string_buffer(str.encode(word)))
-    return res if res > -1 else None
+    return res
 
 
 def multi_mi(txts: Iterable[str], 
              tgts: Iterable[str], 
              targets: Iterable[str], 
              vocabulary: Iterable[str], 
-             workers: int=16, 
-             remove_errors: bool=True) -> dict:
+             workers: int=16) -> dict:
     """Wrapper for C++ calculation function for multiple words and multiple targets.
 
     This function converts variables, calculates MI for all word from @vocabulary and all targets 
@@ -71,7 +68,6 @@ def multi_mi(txts: Iterable[str],
         @targets (Iterable[str]): Iterable of targets.
         @vocabulary (Iterable[str]): list of words.
         @workers (int, optional): The number of parallel processes. Defaults to 16.
-        @remove_errors (bool, optional): If to change error codes to None. Defaults to True.
     
     Result: dictionary of dictionaries with MI as values.
 
@@ -133,7 +129,7 @@ def multi_mi(txts: Iterable[str],
 
     def fnc(word, target, txt_c, n, tgt_c, vocabulary_dict):
         res = mi_lib.mi(txt_c, n, create_string_buffer(str.encode(target)), tgt_c, create_string_buffer(str.encode(word)))
-        vocabulary_dict[word][target] = res if not(remove_errors) or (res > -1) else None
+        vocabulary_dict[word][target] = res
         
     vocabulary_keys = list(vocabulary_dict.keys())
 
