@@ -13,6 +13,7 @@ def token2doc_frequencies(
         tokens_dataframe (DataFrame[TokenFrame]): dataframe with list tokens for doc.
         target (str): name of target column.
         tokens (str): name of tokens column.
+        doc_id (str): name of item id column.
  
     Returns:
         DataFrame[TokenCountFrame]: dataframe with count token per doc.
@@ -190,6 +191,8 @@ def mutual_info_pipeline(
     Args:
         target (str): target columne name.
         tokens (str): tokens column name.
+        doc_id (str): item id column name.
+        docs_number (str): number of docs.
  
     Returns:
         Callable[[DataFrame[TokenFrame]], DataFrame[TokensMIFrame]]: compute pipeline.
