@@ -113,3 +113,7 @@ reuters21578.tar/*
 
 # vscode project
 .vscode/
+
+# virtual environment
+
+venv/
