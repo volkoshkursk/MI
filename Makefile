@@ -3,13 +3,13 @@
 # python version
 VER ?= 3.8
 
-all: mi.so
+all: mi/mi.so
 
 clean:
-	rm -rf *.so *.o
+	rm -rf mi/*.so mi/*.o
 
-mi.o: mi1.cpp 
-	g++ -fPIC -c $$(python${VER}-config  --includes) -o mi.o mi1.cpp
+mi/mi.o: mi/mi1.cpp 
+	g++ -fPIC -c $$(python${VER}-config  --includes) -o mi/mi.o mi/mi1.cpp
 
-mi.so: mi.o
-	g++ $$(python${VER}-config --ldflags) -lpython${VER} -shared mi.o -o libmi.so
+mi/mi.so: mi/mi.o
+	g++ $$(python${VER}-config --ldflags) -lpython${VER} -shared mi/mi.o -o mi/libmi.so
