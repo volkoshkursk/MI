@@ -12,20 +12,29 @@ It is recommended to have a poetry library.
 
 There is several different ways to install this library:
 
-## Installation with poetry.
+## Installation from pip
+
+For installing you can use the following:
+```
+pip3 install text-mi
+```
+
+## Building from sources
+You can download the project from git and install it with following methods.
+### Installation with poetry.
 This is a simpliest and recommended way to install the library.
 Just run 
 ```
 poetry install
 ``` 
-åto install the library. Then you can run your code in poetry's virtual environment with 
+for installing the library. Then you can run your code in poetry's virtual environment with 
 ```
 poetry run script.py
 ```
 
 where `script.py` is your script.
 
-## Building from sources.
+### Installation with pip and `make`
 This way is useful if you don't have a poetry by some reason. However, it is strongly recommended to use the poetry installation.
 
 You need create libmi.so to run this project.
