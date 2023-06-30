@@ -115,5 +115,7 @@ reuters21578.tar/*
 .vscode/
 
 # virtual environment
-
 venv/
+
+# poetry build support files
+mi.egg-info/
