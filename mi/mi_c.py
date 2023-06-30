@@ -4,21 +4,34 @@ from tqdm import tqdm
 import os 
 from ctypes import *
 from typing import Iterable
+from pathlib import Path
 
+# find the C library
+if os.environ.get('MI_LIB_NAME') is None:
+    import importlib.machinery as mch
+    for name in mch.EXTENSION_SUFFIXES:
+        candidate_file = Path(os.path.dirname(__file__)).parent.absolute() / ("libmi"+name)
+        if candidate_file.is_file():
+            os.environ["MI_LIB_NAME"] = str(candidate_file)
+            break
 
-# Connecting C++ library
-libname = os.path.abspath(os.path.join(os.path.dirname(__file__), "libmi.so"))
+# If we haven't fint the C library, raise an exception
+if not os.environ.get('MI_LIB_NAME'):
+    raise FileNotFoundError("DLL not found")
+
+# Connecting to the C library
+libname = os.environ.get('MI_LIB_NAME')
 mi_lib = CDLL(libname)
 mi_lib.mi.restype = c_longdouble
 
 
 def mi(txts: Iterable[str], tgts: Iterable[str], word: str, tgt: str, remove_errors: bool=True) -> float:
-    """ Wrapper for C++ calculation function.
+    """ Wrapper for C calculation function.
 
-    This makes converting variables to C++ types, calling C++ function and returning result.
+    This makes converting variables to C types, calling C function and returning result.
 
     MI is a non-negative value. It is equal to 0 when random variables are independent.
-    In C++ realisation if MI couldn't be calculated the error code is returned. 
+    In C realisation if MI couldn't be calculated the error code is returned. 
     This code is negative. 
     Now there is two possible variants of error codes: -1, when it is impossible to calculate MI and there is NO texts, where is the word and the target,
     and -2 when it is impossible to calculate MI and there IS texts, where is the word and the target.
@@ -51,7 +64,7 @@ def multi_mi(txts: Iterable[str],
              vocabulary: Iterable[str], 
              workers: int=16, 
              remove_errors: bool=True) -> dict:
-    """Wrapper for C++ calculation function for multiple words and multiple targets.
+    """Wrapper for C calculation function for multiple words and multiple targets.
 
     This function converts variables, calculates MI for all word from @vocabulary and all targets 
     from @targets. Result of this function has following strucure: it is dictionary of dictionaries. 
@@ -59,7 +72,7 @@ def multi_mi(txts: Iterable[str],
     Values of this dictionary is a MI for corresponding word and corresponding target.
 
     MI is a non-negative value. It is equal to 0 when random variables are independent.
-    In C++ realisation if MI couldn't be calculated the error code is returned. 
+    In C realisation if MI couldn't be calculated the error code is returned. 
     This code is negative. 
     Now there is two possible variants of error codes: -1, when it is impossible to calculate MI and there is NO texts, where is the word and the target,
     and -2 when it is impossible to calculate MI and there IS texts, where is the word and the target,
