@@ -55,11 +55,13 @@ MI is a non-negative value. It is equal to 0 when random variables are independe
  The main formula, using for calculating MI was found in book Manning K.D., Raghavan P., Schütze H. Introduction to information search. 
 
 $$
+\begin{align}
 I(U,C) = {N_{11} \over N}  \log_2\bigl({N_{11}N \over{(N_{10} + N_{11}) (N_{11} + N_{01})}}\bigr) + \\
 {N_{01} \over N} \log_2({{N_{01} N} \over {(N_{00} + N_{01}) (N_{11} + N_{01})}}) + \\
 {N_{10} \over N} \log_2({{N_{10} N} \over {(N_{10} + N_{11}) (N_{10} + N_{00})}}) + \\
-{N_{00} \over N} \log_2({{N_{00} N} \over {(N_{00} + N_{01}) (N_{10} + N_{00})}})
-,$$
+{N_{00} \over N} \log_2({{N_{00} N} \over {(N_{00} + N_{01}) (N_{10} + N_{00})}}),
+\end{align}
+$$
 
 where 
 - $U$ is the random variable, shows presence of the word W.
