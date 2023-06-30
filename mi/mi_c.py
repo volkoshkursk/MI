@@ -31,11 +31,6 @@ def mi(txts: Iterable[str], tgts: Iterable[str], word: str, tgt: str) -> float:
     This makes converting variables to C types, calling C function and returning result.
 
     MI is a non-negative value. It is equal to 0 when random variables are independent.
-    In C realisation if MI couldn't be calculated the error code is returned. 
-    This code is negative. 
-    Now there is two possible variants of error codes: -1, when it is impossible to calculate MI and there is NO texts, where is the word and the target,
-    and -2 when it is impossible to calculate MI and there IS texts, where is the word and the target.
-
     Args:
         @txts (Iterable[str]): Iterable of texts.
         @tgts: (Iterable[str]): Iterable of targets corresponding to texts from @txts.
@@ -69,11 +64,6 @@ def multi_mi(txts: Iterable[str],
     Values of this dictionary is a MI for corresponding word and corresponding target.
 
     MI is a non-negative value. It is equal to 0 when random variables are independent.
-    In C realisation if MI couldn't be calculated the error code is returned. 
-    This code is negative. 
-    Now there is two possible variants of error codes: -1, when it is impossible to calculate MI and there is NO texts, where is the word and the target,
-    and -2 when it is impossible to calculate MI and there IS texts, where is the word and the target,
-
     Args:
         @txts (Iterable[str]): Iterable of texts.
         @tgts (Iterable[str]): Iterable of targets corresponding to texts from @txts.

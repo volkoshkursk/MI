@@ -166,10 +166,10 @@ def compute_mutual_information(
     that carries the presence or absence of a word W.
  
     Args:
-        stats_dataframe (DataFrame[TokenStatsFrame]): simple stats frame.
+        stats_dataframe (DataFrame): simple stats frame.
  
     Returns:
-        DataFrame[TokensMIFrame]: simple tokens stats.
+        DataFrame: simple tokens stats.
     """
     return stats_dataframe.assign(
         mutual_information=stats_dataframe.assign(
@@ -192,7 +192,7 @@ def mutual_info_pipeline(
         target (str): target columne name.
         tokens (str): tokens column name.
         doc_id (str): item id column name.
-        docs_number (str): number of docs.
+        docs_number (int): number of docs.
  
     Returns:
         Callable[[DataFrame[TokenFrame]], DataFrame[TokensMIFrame]]: compute pipeline.
