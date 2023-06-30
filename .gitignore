@@ -119,3 +119,7 @@ venv/
 
 # poetry build support files
 mi.egg-info/
+
+# build results and dists
+build/
+dist/
