@@ -1,17 +1,6 @@
-#include <Python.h>
-#include <cstring>
-#include <iostream>
-#include <math.h> 
-#include <vector>
-#include <stdexcept>
+#include "mi1.h"
 
-using namespace std;
-
-#ifdef __cplusplus
-extern "C" double logarithm(double a)
-#else
 double logarithm(double a)
-#endif
 {
 	if (a != 0)
 	{
@@ -23,11 +12,7 @@ double logarithm(double a)
 	}
 }
 
-#ifdef __cplusplus
-extern "C" long double mi(char** news, unsigned n2, char* class_, char** classes, char* word)
-#else
 long double mi(char** news, unsigned n2, char* class_, char** classes, char* word)
-#endif
 {
 	long double N11 = 0;
 	long double N10 = 0;
@@ -76,9 +61,4 @@ long double mi(char** news, unsigned n2, char* class_, char** classes, char* wor
 		    return -2;
 		}
 	}
-}
-
-int main()
-{
-	return 1;
 }
