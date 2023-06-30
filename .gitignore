@@ -118,7 +118,7 @@ reuters21578.tar/*
 venv/
 
 # poetry build support files
-mi.egg-info/
+*.egg-info/
 
 # build results and dists
 build/
